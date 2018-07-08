@@ -1,0 +1,28 @@
+body{
+   background-image: url(/sharelife/images/surface.jpg);
+   background-position: center;
+   background-repeat: repeat;
+   color: black;
+}
+.row{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.3em;
+}
+#heading{
+    font-size: 1.3em;
+}
+input{
+    background-color: transparent;
+    border:none;
+    border-color: transparent;
+}
+hr{
+    background-color: black;
+    height: 1px;
+}
+
+.row a{
+    color: #000099;
+}

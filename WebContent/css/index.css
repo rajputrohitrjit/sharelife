@@ -1,0 +1,149 @@
+
+#navbarbody{
+    /*background-image: url(/sharelife/images/blood.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;*/
+    height:700px;
+    z-index:1;
+}
+#navbarbody img{
+	height:100%;
+}
+    
+	
+	
+	
+	
+.navbar{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index:1;
+}
+.scrollToTop{
+	display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: #b3b3b3; 
+    color: white; /* Text color */
+    width: 50px;
+    text-decoration: none;
+    border-radius: 70px; /* Rounded corners */
+    
+}
+.scrollToTop:hover{
+	text-decoration:none;
+}
+
+#scrollToTop{
+    font-family:"wide font";
+    font-size:35px;
+}
+
+#message{
+    width: 100%;
+    color: white;
+    background-color: #262228;
+    vertical-align: middle;
+}
+
+.lead{
+    padding-top: 2%;
+    font-family: 'Bellefair', serif;
+    font-size:2em;
+}
+
+
+
+
+#events{
+    padding-top: 2%;
+    height: auto;
+    background-color: white;
+    color:black;
+}
+#content{
+	overflow:hidden;
+	z-index: 0;	 
+}
+
+#events h2{
+    padding-bottom: 5%;
+    font-family: 'Bellefair', serif;
+    font-size: 300%;
+}
+@media (max-width: 992px) {
+				#ediv{
+					margin-bottom:50px;
+				}
+                #details{
+                    padding-top: 10px;
+                    border-top: 1px solid black;
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                }
+                #vdetails{
+                    padding-top: 10px;
+                }
+            }
+
+
+
+#founders{
+    background-color: #6699ff;
+    padding-bottom:5%;
+}
+
+#founders h1{
+    font-family: 'Bellefair', serif;
+    color: white;
+    padding-top: 1%;
+    padding-bottom: 5%;
+}
+#founders img{
+    width: 200;
+    height: 200;
+}
+#founders span{
+    font-family: 'Bellefair', serif;
+    font-size: 200%;
+}
+#member{
+	margin-top:10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+html {
+  font-size: 14px;
+}
+
+@include media-breakpoint-up(sm) {
+ html {
+    font-size: 16px;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html {
+    font-size: 28px;
+  }
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="sharelife">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="activation.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/tanmay/workspaceMars/sharelife/activation.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="mail.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/tanmay/workspaceMars/sharelife/mail.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="javax.mail.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/tanmay/workspaceMars/sharelife/javax.mail.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="FileUpload.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/tanmay/workspaceMars/sharelife/FileUpload.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="mysql.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/tanmay/workspaceMars/sharelife/WebContent/WEB-INF/mysql.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="java-json.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/tanmay/workspaceMars/sharelife/java-json.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="sharelife"/>
+        <property name="java-output-path" value="/sharelife/build/classes"/>
+    </wb-module>
+</project-modules>
