@@ -14,11 +14,9 @@ import javax.mail.internet.MimeMessage;
 public class SendGmail {
 
 	public static void mail(String matter, ResultSet rs) {
-		final String username = "xyx@gmail.com"; // replace this by the Email ID
-		final String password = "xyx_password";	// replace this by the password
-		
-		// {change the setting of Emaild ID to allow less secure app to send Emails}
-		
+		final String username = "sharelife29@gmail.com";
+		final String password = "share@123";
+
 		Properties props = new Properties();
 		// properties 
 		props.put("mail.smtp.auth", "true");

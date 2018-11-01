@@ -13,7 +13,7 @@ public class DBHelper {
 	final static String provider = "com.mysql.jdbc.Driver";
 	final static String dsn = "jdbc:mysql://localhost:3306/sharelife";
 	final static String user = "root";
-	final static String password = "123";
+	final static String password = "1234";
 
 	public static Connection openConnection() {
 		try {
