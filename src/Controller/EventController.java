@@ -2,6 +2,7 @@ package Controller;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.*;
 
 import com.mysql.jdbc.PreparedStatement;
 
@@ -13,12 +14,25 @@ public class EventController {
 	public static boolean EventEntry(Event E) {
 		try {
 			Connection cn = DBHelper.openConnection();
-			String query = "insert into event (name,date,time,stateid,cityid,address,message,organizationid,coordinator_name,coordinator_phone,coordinator_email) values('"
-					+ E.getName() + "','" + E.getDate() + "','" + E.getTime() + "'," + Integer.parseInt(E.getStateid())
-					+ "," + Integer.parseInt(E.getCityid()) + ",'" + E.getAddress() + "','" + E.getMessage() + "',"
-					+ E.getOrganizationid() + ",'" + E.getCoordinator_name() + "','" + E.getCoordinator_phone() + "','"
-					+ E.getCoordinator_emailid() + "')";
-			boolean sn = DBHelper.executeUpdate(query, cn);
+			//String query = "insert into event (name,date,time,stateid,cityid,address,message,organizationid,coordinator_name,coordinator_phone,coordinator_email) values('"
+			//		+ e.getname() + "','" + e.getdate() + "','" + e.gettime() + "'," + integer.parseint(e.getstateid())
+			//		+ "," + integer.parseint(e.getcityid()) + ",'" + e.getaddress() + "','" + e.getmessage() + "',"
+			//		+ e.getorganizationid() + ",'" + e.getcoordinator_name() + "','" + e.getcoordinator_phone() + "','"
+			//		+ e.getcoordinator_emailid() + "')";
+			String query = "insert into event(name,date,time,stateid,cityid,address,message,organizationid,coordinator_name,coordinator_phone,coordinator_email) values(?,?,?,?,?,?,?,?,?,?,?)";
+			PreparedStatement smt = (PreparedStatement) cn.prepareStatement(query);
+			smt.setString(1,E.getName());
+			smt.setString(2,E.getDate());
+			smt.setString(3,E.getTime());
+			smt.setString(4,Integer.parseInt(E.getStateid()));
+			smt.setString(5,Integer.parseInt(E.getCityid()));
+			smt.setString(6,E.getAddress());
+			smt.setString(7,E.getMessage());
+			smt.setString(8,E.getOrganizationid());
+			smt.setString(9,E.getCoordinator_name());
+			smt.setString(10,E.getCoordinator_phone());
+			smt.setString(11,E.getCoordinator_emailid());
+			boolean sn = smt.executeUpdate();
 			if (sn) {
 				return true;
 			} else {
@@ -57,8 +71,11 @@ public class EventController {
 	public static ResultSet DonorsDetect(String cityid) {
 		try {
 			Connection cn = DBHelper.openConnection();
-			String query = "select emailid from user where city=" + cityid;
-			ResultSet rs = DBHelper.executeQuery(query, cn);
+			//String query = "select emailid from user where city=" + cityid;
+			String query = "select emailid from user where city = ?";
+			PreparedStatement smt = (PreparedStatement) cn.prepareStatement(query);
+			smt.setString(1,cityid);
+			ResultSet rs = smt.executeQuery();
 			return rs;
 		} catch (Exception e) {
 			System.out.println("DonorsDetect " + e);
@@ -121,9 +138,11 @@ public class EventController {
 	public static ResultSet FetchEvents(String id) {
 		try {
 			Connection cn = DBHelper.openConnection();
-			String query = "select e.name, e.date, e.time, (select statename from states where stateid = e.stateid) as state, (select cityname from cities where cityid = e.cityid) as city, e.address, o.organization_name, o.logo,e.id from event e, organization o where o.organization_id = e.organizationid and organization_id = "
-					+ id + "";
-			ResultSet rs = DBHelper.executeQuery(query, cn);
+			//String query = "select e.name, e.date, e.time, (select statename from states where stateid = e.stateid) as state, (select cityname from cities where cityid = e.cityid) as city, e.address, o.organization_name, o.logo,e.id from event e, organization o where o.organization_id = e.organizationid and organization_id = "+ id + "";
+			String query = "select e.name, e.date, e.time, (select statename from states where stateid = e.stateid) as state, (select cityname from cities where cityid = e.cityid) as city, e.address, o.organization_name, o.logo,e.id from event e, organization o where o.organization_id = e.organizationid and organization_id = ?";
+			PreparedStatement smt = (PreparedStatement) cn.prepareStatement(query);
+			smt.setString(1,id);
+			ResultSet rs = smt.executeQuery();
 			return rs;
 		} catch (Exception e) {
 			System.out.println("FetchEvents " + e);
