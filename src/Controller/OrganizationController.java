@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 
 import com.mysql.jdbc.PreparedStatement;
-
+import java.sql.*;
 import Model.Organization;
 
 interface OrganizatgionInterface {
@@ -28,13 +28,28 @@ public class OrganizationController implements OrganizatgionInterface {
 	public static boolean OganizationRegistrationSubmit(Organization O) {
 		try {
 			Connection cn = DBHelper.openConnection();
-			String query = "insert into organization(organization_name,central_office_address,email,website,type,administrative_address,administrative_email,administrative_phone,administrative_fax,password,logo,firstname,lastname) values ('"
-					+ O.getOrganization_name() + "','" + O.getCentral_office_address() + "','" + O.getEmail() + "','"
-					+ O.getWebsite() + "','" + O.getType() + "','" + O.getAdministrative_address() + "','"
-					+ O.getAdministrative_email() + "','" + O.getAdministrative_phone() + "','"
-					+ O.getAdministrative_fax() + "','" + O.getPassword() + "','" + O.getLogo() + "','"
-					+ O.getFristname() + "','" + O.getLastname() + "')";
-			boolean sn = DBHelper.executeUpdate(query, cn);
+			//String query = "insert into organization(organization_name,central_office_address,email,website,type,administrative_address,administrative_email,administrative_phone,administrative_fax,password,logo,firstname,lastname) values ('"
+			//		+ O.getOrganization_name() + "','" + O.getCentral_office_address() + "','" + O.getEmail() + "','"
+			//		+ O.getWebsite() + "','" + O.getType() + "','" + O.getAdministrative_address() + "','"
+			//		+ O.getAdministrative_email() + "','" + O.getAdministrative_phone() + "','"
+			//		+ O.getAdministrative_fax() + "','" + O.getPassword() + "','" + O.getLogo() + "','"
+			//		+ O.getFristname() + "','" + O.getLastname() + "')";
+			String query = "insert into organization(organization_name,central_office_address,email,website,type,administrative_address,administrative_email,administrative_phone,administrative_fax,password,logo,firstname,lastname) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			PreparedStatement smt = (PreparedStatement) cn.prepareStatement(query);
+			smt.setString(O.getOrganization_name());
+			smt.setString(O.getCentral_Office_address());
+			smt.setString(O.getEmail());
+			smt.setString(O.getWebsite());
+			smt.setString(O.getType());
+			smt.setString(O.getAdministrative_address());
+			smt.setString(O.getAdministrative_email());
+			smt.setString(O.getAdministrative_phone());
+			smt.setString(O.getAdministrative_fax());
+			smt.setString(O.getPassword());
+			smt.setString(O.getLogo());
+			smt.setString(O.getFristname());
+			smt.setString(O.getLastname());
+			boolean sn = smt.executeUpdate();
 			if (sn) {
 				return true;
 			} else {
@@ -50,8 +65,12 @@ public class OrganizationController implements OrganizatgionInterface {
 	public static ResultSet OrganizationLoginCheck(String oid, String pwd) {
 		try {
 			Connection cn = DBHelper.openConnection();
-			String query = "select * from organization where organization_id=" + oid + " and password='" + pwd + "'";
-			ResultSet rs = DBHelper.executeQuery(query, cn);
+			//String query = "select * from organization where organization_id=" + oid + " and password='" + pwd + "'";
+			String query = "select * from organization where organization_id = ? and password = ?";
+			PreparedStatement smt = (PreparedStatement) cn.prepareStatement(query);
+			smt.setString(1,oid);
+			smt.setString(2,pwd);
+			ResultSet rs = smt.executeQuery();
 			return rs;
 		} catch (Exception e) {
 			System.out.println("OrganizationLoginCheck " + e);
@@ -62,8 +81,11 @@ public class OrganizationController implements OrganizatgionInterface {
 	public static String getOrganizationEmail(String id) {
 		try {
 			Connection cn = DBHelper.openConnection();
-			String query = "select email from organization where organization_id=" + id + "";
-			ResultSet rs = DBHelper.executeQuery(query, cn);
+			//String query = "select email from organization where organization_id=" + id + "";
+			String query = "select email from organization where organization_id=?";
+			PreparedStatement smt = (PreparedStatement) cn.prepareStatement(query);
+			smt.setString(1,id);
+			ResultSet rs = smt.executeQuery();
 			rs.next();
 			return rs.getString(1);
 		} catch (Exception e) {
@@ -75,8 +97,11 @@ public class OrganizationController implements OrganizatgionInterface {
 	public static ResultSet OrganizationLogin(String id) {
 		try {
 			Connection cn = DBHelper.openConnection();
-			String query = "select * from organization where organization_id=" + id + "";
-			ResultSet rs = DBHelper.executeQuery(query, cn);
+			//String query = "select * from organization where organization_id=" + id + "";
+			String query = "select * from organization where organization_id=?";
+			PreparedStatement smt = (PreparedStatement) cn.prepareStatement(query);
+			smt.setString(1,id);
+			ResultSet rs = smt.executeQuery();
 			return rs;
 		} catch (Exception e) {
 			System.out.println("OrganizationLoginCheck " + e);
