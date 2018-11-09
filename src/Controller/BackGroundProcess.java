@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.sql.*;
 
 import com.sun.mail.imap.protocol.MailboxInfo;
 
@@ -59,8 +60,11 @@ public class BackGroundProcess {
 	private static void EventHandler(String date) {
 		try {
 			Connection cn = DBHelper.openConnection();
-			String query = "select * from event where date = '" + date + "'";
-			ResultSet rs = DBHelper.executeQuery(query, cn);
+			//String query = "select * from event where date = '" + date + "'";
+			String query = "SELECT * FROM event WHERE date = ?";
+			PreparedStatement smt = (PreparedStatement) cn.prepareStatement(query);
+			smt.setString(1,date);
+			ResultSet rs = smt.executeQuery();
 
 			while (rs.next()) {
 				// create an object of event
@@ -87,7 +91,11 @@ public class BackGroundProcess {
 					String matter = EventController.EmailCreator(E, O);
 
 					// fetch the email id of donors
-					String fetch = "select emailid from user where city = " + rs.getString("cityid") + "";
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+					Date date = new Date();
+					String current_date = dateFormat.format(date);
+
+					String fetch = "select emailid from user where city = " + rs.getString("cityid") + " and emailsetting > "+currenct_date+" ";
 					ResultSet rs3 = DBHelper.executeQuery(fetch, cn);
 					if (rs3.next()) {
 						// send the mail
