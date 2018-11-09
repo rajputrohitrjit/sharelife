@@ -3,18 +3,20 @@ package Controller;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import com.mysql.jdbc.PreparedStatement;
-
 import Model.Certification;
+import java.sql.*;
 
 public class CertificationController {
 	public static boolean addCertificate(Certification C) {
 		try {
 			Connection cn = DBHelper.openConnection();
-			String query = "insert into certificate values(" + C.getOrganization_id() + ",'" + C.getCertificate()
-					+ "')";
-			boolean sn = DBHelper.executeUpdate(query, cn);
+			//String query = "insert into certificate values(" + C.getOrganization_id() + ",'" + C.getCertificate()+ "')";
+			String query = "INSERT INTO certificate VALUES(?,?)";
+			PreparedStatement smt = (PreparedStatement) cn.prepareStatement(query);
+			smt.setString(1,C.getOrganization_id());
+			smt.setString(2,C.getCertificate());
+			boolean sn = smt.executeUpdate();
 			if (sn) {
 				return true;
 			} else {
@@ -29,8 +31,11 @@ public class CertificationController {
 	public static int getorganizationid(String name) {
 		try {
 			Connection cn = DBHelper.openConnection();
-			String query = "select organization_id from organization where organization_name = '" + name + "'";
-			ResultSet rs = DBHelper.executeQuery(query, cn);
+			//String query = "select organization_id from organization where organization_name = '" + name + "'";
+			String query = "SELECT organization_id FROM orgainzation where organization_name = ?";
+			PreparedStatement smt = (PreparedStatement) cn.prepareStatement(query);
+			smt.setString(1,name);
+			ResultSet rs = smt.executeQuery();
 			rs.next();
 			int id = rs.getInt(1);
 			return id;
@@ -43,8 +48,11 @@ public class CertificationController {
 	public static ResultSet GetCertificationByID(String id) {
 		try {
 			Connection cn = DBHelper.openConnection();
-			String query = "select certificate from certificate where organization_id = " + id + "";
-			ResultSet rs = DBHelper.executeQuery(query, cn);
+			//String query = "select certificate from certificate where organization_id = " + id + "";
+			String query = "select certificate from certificate where organization_id = ?";
+			PreparedStatement smt = (PreparedStatement) cn.prepareStatement(query);
+			smt.setString(1,id);
+			ResultSet rs = smt.executeQuery();
 			return rs;
 		} catch (Exception e) {
 			System.out.println("GetCertificationByID " + e);
